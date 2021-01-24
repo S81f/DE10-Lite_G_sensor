@@ -1,0 +1,9 @@
+ver 0.2: Krypted for new Expiration date 20201024
+Ver 0.1: Add simple print loggning of TSW and the common SVCs, 20180311
+Ver 0: 20180209
+HW_1 is for the software tools CASE1_A and B
+HW_RT is for the RTOS chapters and tasks
+Change in BSP to "reduced device drivers" and  "Small C library"
+It can be problem with long file names. 
+E.G "C:/RTOS_course/..."
+The hardware is described in the book and powerpoints

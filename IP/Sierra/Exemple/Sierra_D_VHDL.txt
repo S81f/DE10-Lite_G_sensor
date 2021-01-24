@@ -1,0 +1,58 @@
+-- Example of simple IRQ handling, Lennart Lindh
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity IRQ_0_pulse_generator is
+	port(
+		clk	: in	std_logic;
+		input	 : in	std_logic;
+		reset	 : in	std_logic;
+		output	 : out	std_logic_vector(1 downto 0)
+	);
+end entity;
+
+architecture rtl of IRQ_0_pulse_generator is
+
+	-- Build an enumerated type for the state machine
+	type state_type is (s0_waiting, s1, s2);
+	-- Register to hold the current state
+	signal state   : state_type;
+	signal input_sampling : std_logic;
+
+begin
+	-- Logic to advance to the next state
+	process (clk, reset)
+	begin
+		if reset = '0' then
+			state <= s0_waiting;
+			output(1 downto 0) <= "11";
+		elsif (rising_edge(clk)) then
+		    output(1) <= '1';
+		    input_sampling <= input; -- sampler input
+			case state is
+				when s0_waiting=>
+					if input_sampling = '0' then
+						state <= s1;
+						output(0) <= '0';
+					else
+						state <= s0_waiting;
+						output(0) <= '1';
+					end if;
+				when s1=>
+				    output(0) <= '0';
+					state <= s2;
+				when s2=>
+				    output(0) <= '1';
+					if input_sampling = '1' then
+						state <= s0_waiting;
+					else
+						state <= s2;
+					end if;
+			end case;
+		end if;
+	end process;
+	
+
+
+end rtl;

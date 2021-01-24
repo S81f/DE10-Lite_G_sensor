@@ -1,0 +1,8 @@
+This is a free trial and education version of Sierra and for all MAX 10 devices from Intel FPGA. 
+The IP component stop after a random time before deadlock, at least some ohuers.
+This version contents:
+8 task
+8 prioriteter
+8 semaforer
+2 externa IRQ
+For more information of the functions see the SW manual
